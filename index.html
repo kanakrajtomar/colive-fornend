@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -216,3 +216,736 @@
     </script>
 </body>
 </html>
+-->
+<!--There above is the code for the document verfication page and the below is code for the landing page of the pg booking -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColivePlusRooms - Premium PG & Room Booking</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #667eea;
+        }
+
+        .verify-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .verify-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .hero-3d {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-button:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Room Categories Section */
+        .categories {
+            padding: 5rem 0;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .luxury-bg { background-image: url('/placeholder.svg?height=250&width=400&text=Luxury+Suite'); }
+        .medium-bg { background-image: url('/placeholder.svg?height=250&width=400&text=Premium+Room'); }
+        .affordable-bg { background-image: url('/placeholder.svg?height=250&width=400&text=Standard+Room'); }
+
+        .category-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .luxury-badge { color: #d4af37; }
+        .medium-badge { color: #667eea; }
+        .affordable-badge { color: #10b981; }
+
+        .category-content {
+            padding: 2rem;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-price {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .luxury-price { color: #d4af37; }
+        .medium-price { color: #667eea; }
+        .affordable-price { color: #10b981; }
+
+        .category-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-features li {
+            padding: 0.3rem 0;
+            color: #666;
+        }
+
+        .category-features li:before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .book-btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .luxury-btn {
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            color: white;
+        }
+
+        .medium-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .affordable-btn {
+            background: linear-gradient(135deg, #10b981, #34d399);
+            color: white;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Room Gallery */
+        .gallery {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .room-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .room-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .room-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .room-info {
+            padding: 1.5rem;
+        }
+
+        .room-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .room-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .room-features {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section p, .footer-section li {
+            color: #ccc;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 1rem;
+            text-align: center;
+            color: #999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* 3D Canvas Styles */
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">ColivePlusRooms</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#rooms">Rooms</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="https://coliveplusrooms.com/verification.html" class="verify-btn">Document Verification</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <h1>Premium Living Spaces</h1>
+            <p>Experience luxury, comfort, and convenience in our carefully curated PG accommodations</p>
+            <a href="#rooms" class="cta-button">Explore Rooms</a>
+        </div>
+    </section>
+
+    <!-- Room Categories -->
+    <section class="categories" id="rooms">
+        <div class="container">
+            <h2 class="section-title">Choose Your Perfect Stay</h2>
+            <p class="section-subtitle">From luxury suites to budget-friendly options, we have something for everyone</p>
+            
+            <div class="category-grid">
+                <!-- Luxury Category -->
+                <div class="category-card">
+                    <div class="category-image luxury-bg">
+                        <span class="category-badge luxury-badge">LUXURY</span>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-title">Luxury Suite</h3>
+                        <div class="category-price luxury-price">₹25,000/month</div>
+                        <ul class="category-features">
+                            <li>Private bathroom with premium fixtures</li>
+                            <li>Air conditioning & heating</li>
+                            <li>King-size bed with premium mattress</li>
+                            <li>Work desk & ergonomic chair</li>
+                            <li>Mini refrigerator & microwave</li>
+                            <li>High-speed WiFi</li>
+                            <li>Daily housekeeping</li>
+                            <li>24/7 concierge service</li>
+                        </ul>
+                        <button class="book-btn luxury-btn">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Medium Category -->
+                <div class="category-card">
+                    <div class="category-image medium-bg">
+                        <span class="category-badge medium-badge">PREMIUM</span>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-title">Premium Room</h3>
+                        <div class="category-price medium-price">₹18,000/month</div>
+                        <ul class="category-features">
+                            <li>Shared bathroom (2 people)</li>
+                            <li>Air conditioning</li>
+                            <li>Queen-size bed</li>
+                            <li>Study table & chair</li>
+                            <li>Shared refrigerator access</li>
+                            <li>High-speed WiFi</li>
+                            <li>Weekly housekeeping</li>
+                            <li>Common area access</li>
+                        </ul>
+                        <button class="book-btn medium-btn">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Affordable Category -->
+                <div class="category-card">
+                    <div class="category-image affordable-bg">
+                        <span class="category-badge affordable-badge">STANDARD</span>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-title">Standard Room</h3>
+                        <div class="category-price affordable-price">₹12,000/month</div>
+                        <ul class="category-features">
+                            <li>Shared bathroom (4 people)</li>
+                            <li>Fan & natural ventilation</li>
+                            <li>Single bed with storage</li>
+                            <li>Basic study area</li>
+                            <li>Common kitchen access</li>
+                            <li>WiFi in common areas</li>
+                            <li>Self-service laundry</li>
+                            <li>Community living space</li>
+                        </ul>
+                        <button class="book-btn affordable-btn">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Room Gallery -->
+    <section class="gallery">
+        <div class="container">
+            <h2 class="section-title">Featured Rooms</h2>
+            <p class="section-subtitle">Take a look at our most popular accommodations</p>
+            
+            <div class="room-grid">
+                <div class="room-card">
+                    <div class="room-image" style="background-image: url('/placeholder.svg?height=200&width=300&text=Deluxe+Suite')"></div>
+                    <div class="room-info">
+                        <h3 class="room-title">Deluxe Suite with Balcony</h3>
+                        <div class="room-price">₹28,000/month</div>
+                        <p class="room-features">Private balcony, premium amenities, city view</p>
+                    </div>
+                </div>
+
+                <div class="room-card">
+                    <div class="room-image" style="background-image: url('/placeholder.svg?height=200&width=300&text=Executive+Room')"></div>
+                    <div class="room-info">
+                        <h3 class="room-title">Executive Room</h3>
+                        <div class="room-price">₹22,000/month</div>
+                        <p class="room-features">Work station, high-speed internet, business center access</p>
+                    </div>
+                </div>
+
+                <div class="room-card">
+                    <div class="room-image" style="background-image: url('/placeholder.svg?height=200&width=300&text=Student+Special')"></div>
+                    <div class="room-info">
+                        <h3 class="room-title">Student Special</h3>
+                        <div class="room-price">₹15,000/month</div>
+                        <p class="room-features">Study-friendly environment, library access, meal plans</p>
+                    </div>
+                </div>
+
+                <div class="room-card">
+                    <div class="room-image" style="background-image: url('/placeholder.svg?height=200&width=300&text=Twin+Sharing')"></div>
+                    <div class="room-info">
+                        <h3 class="room-title">Twin Sharing Room</h3>
+                        <div class="room-price">₹10,000/month</div>
+                        <p class="room-features">Shared accommodation, budget-friendly, social environment</p>
+                    </div>
+                </div>
+
+                <div class="room-card">
+                    <div class="room-image" style="background-image: url('/placeholder.svg?height=200&width=300&text=Studio+Apartment')"></div>
+                    <div class="room-info">
+                        <h3 class="room-title">Studio Apartment</h3>
+                        <div class="room-price">₹30,000/month</div>
+                        <p class="room-features">Independent living, kitchenette, separate entrance</p>
+                    </div>
+                </div>
+
+                <div class="room-card">
+                    <div class="room-image" style="background-image: url('/placeholder.svg?height=200&width=300&text=Garden+View')"></div>
+                    <div class="room-info">
+                        <h3 class="room-title">Garden View Room</h3>
+                        <div class="room-price">₹20,000/month</div>
+                        <p class="room-features">Peaceful environment, garden access, natural lighting</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ColivePlusRooms</h3>
+                    <p>Your premium destination for comfortable and affordable PG accommodations. We provide safe, clean, and modern living spaces for students and working professionals.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#rooms">Rooms</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="https://coliveplusrooms.com/verification.html">Document Verification</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Room Categories</h3>
+                    <ul>
+                        <li><a href="#luxury">Luxury Suites</a></li>
+                        <li><a href="#premium">Premium Rooms</a></li>
+                        <li><a href="#standard">Standard Rooms</a></li>
+                        <li><a href="#shared">Shared Accommodations</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>📍 123 University Road, Student Hub Area</p>
+                    <p>📞 +91 98765 43210</p>
+                    <p>✉️ info@coliveplusrooms.com</p>
+                    <p>🌐 www.coliveplusrooms.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ColivePlusRooms. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 3D Background Animation
+        let scene, camera, renderer, particles;
+
+        function init3D() {
+            const canvas = document.getElementById('hero-canvas');
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            // Create floating particles
+            const geometry = new THREE.BufferGeometry();
+            const particleCount = 100;
+            const positions = new Float32Array(particleCount * 3);
+
+            for (let i = 0; i < particleCount * 3; i++) {
+                positions[i] = (Math.random() - 0.5) * 20;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+            const material = new THREE.PointsMaterial({
+                color: 0xffffff,
+                size: 0.1,
+                transparent: true,
+                opacity: 0.6
+            });
+
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            camera.position.z = 5;
+
+            animate3D();
+        }
+
+        function animate3D() {
+            requestAnimationFrame(animate3D);
+
+            if (particles) {
+                particles.rotation.x += 0.001;
+                particles.rotation.y += 0.002;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (camera && renderer) {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize 3D scene when page loads
+        window.addEventListener('load', init3D);
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Add booking functionality
+        document.querySelectorAll('.book-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Booking functionality will be implemented soon! Please contact us directly for now.');
+            });
+        });
+    </script>
+</body>
+</html>
+
