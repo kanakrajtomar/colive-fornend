@@ -224,8 +224,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ColivePlusRooms - Modern Student Housing & Co-living</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>ColivePlus - Modern Co-living & Student Housing</title>
+    <meta name="description" content="Premium co-living spaces and student housing with modern amenities" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -238,6 +239,7 @@
             line-height: 1.6;
             color: #2d3748;
             background: #ffffff;
+            overflow-x: hidden;
         }
 
         /* Header Styles */
@@ -245,11 +247,12 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(16px) saturate(180%);
             z-index: 1000;
             padding: 1rem 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(209, 213, 219, 0.3);
+            transition: all 0.3s ease;
         }
 
         .nav-container {
@@ -264,14 +267,14 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
 
         .logo-icon {
             width: 40px;
             height: 40px;
-            background: #319795;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #0f766e 0%, #14b8a6 50%, #10b981 100%);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -282,7 +285,7 @@
 
         .logo-text {
             font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 800;
             color: #2d3748;
         }
 
@@ -298,35 +301,44 @@
             font-weight: 500;
             font-size: 0.95rem;
             transition: color 0.2s ease;
+            position: relative;
         }
 
         .nav-link:hover {
-            color: #319795;
+            color: #14b8a6;
         }
 
-        .nav-dropdown {
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            cursor: pointer;
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #14b8a6;
+            transition: width 0.3s ease;
         }
 
-        .verify-btn {
-            background: #319795;
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .book-btn {
+            background: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
             color: white;
             padding: 0.75rem 1.5rem;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
         }
 
-        .verify-btn:hover {
-            background: #2c7a7b;
-            transform: translateY(-1px);
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(20, 184, 166, 0.4);
         }
 
         /* Hero Section */
@@ -335,7 +347,21 @@
             display: flex;
             align-items: center;
             padding: 6rem 0 4rem;
-            background: #ffffff;
+            background: linear-gradient(135deg, #f0fdfa 0%, #ffffff 50%, #ecfdf5 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23f0f9ff" opacity="0.5"/><circle cx="75" cy="75" r="1" fill="%23ecfdf5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.6;
+            z-index: 1;
         }
 
         .hero-container {
@@ -346,153 +372,197 @@
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-content {
-            max-width: 500px;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.3s forwards;
         }
 
         .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
+            font-size: 4rem;
+            font-weight: 900;
             line-height: 1.1;
             color: #2d3748;
             margin-bottom: 1.5rem;
         }
 
+        .hero-title .highlight {
+            background: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         .hero-subtitle {
-            font-size: 1.1rem;
+            font-size: 1.25rem;
             color: #4a5568;
-            margin-bottom: 2rem;
-            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
         }
 
         .search-section {
-            margin-bottom: 2rem;
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(209, 213, 219, 0.3);
         }
 
         .search-label {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #4a5568;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             display: block;
+            font-weight: 600;
         }
 
         .search-container {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.75rem;
             align-items: center;
         }
 
         .search-input {
             flex: 1;
-            padding: 1rem 1.2rem;
+            padding: 1rem 1.5rem;
             border: 2px solid #e2e8f0;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 1rem;
-            transition: border-color 0.2s ease;
+            transition: all 0.3s ease;
             background: #f7fafc;
         }
 
         .search-input:focus {
             outline: none;
-            border-color: #319795;
+            border-color: #14b8a6;
             background: white;
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
         }
 
         .location-btn {
             padding: 1rem;
             border: 2px solid #e2e8f0;
-            border-radius: 8px;
+            border-radius: 12px;
             background: #f7fafc;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
         }
 
         .location-btn:hover {
-            border-color: #319795;
+            border-color: #14b8a6;
             background: white;
+            transform: scale(1.05);
         }
 
         .search-btn {
             padding: 1rem 2rem;
-            background: #319795;
+            background: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s ease;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .search-btn:hover {
-            background: #2c7a7b;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(20, 184, 166, 0.3);
         }
 
         .hero-visual {
             position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.6s forwards;
         }
 
         .main-image {
             width: 100%;
             height: 400px;
-            background: url('/placeholder.svg?height=400&width=600&text=Modern+Building') center/cover;
-            border-radius: 16px;
+            background: url('https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=600&h=400&q=80') center/cover;
+            border-radius: 20px;
             margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .category-cards {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
+        .main-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0,0,0,0.1) 0%, transparent 100%);
         }
 
-        .category-card {
+        .floating-card {
+            position: absolute;
             background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .floating-card-1 {
+            top: -20px;
+            right: -20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-card-2 {
+            bottom: -20px;
+            left: -20px;
+            animation: float 3s ease-in-out infinite 1.5s;
+        }
+
+        .floating-card .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .category-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
-        }
-
-        .category-image {
-            width: 60px;
-            height: 60px;
-            border-radius: 8px;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .student-img { background-image: url('/placeholder.svg?height=60&width=60&text=👩‍🎓'); }
-        .professional-img { background-image: url('/placeholder.svg?height=60&width=60&text=👨‍💼'); }
-        .apartment-img { background-image: url('/placeholder.svg?height=60&width=60&text=👫'); }
-
-        .category-info h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 0.2rem;
-        }
-
-        .category-arrow {
-            margin-left: auto;
-            color: #319795;
+            justify-content: center;
             font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .floating-card-1 .icon {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        }
+
+        .floating-card-2 .icon {
+            background: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
+        }
+
+        .floating-card h4 {
+            font-weight: 700;
+            color: #2d3748;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .floating-card p {
+            font-size: 0.9rem;
+            color: #4a5568;
         }
 
         /* Stats Section */
         .stats {
-            padding: 4rem 0;
-            background: #f7fafc;
+            padding: 5rem 0;
+            background: white;
         }
 
         .stats-container {
@@ -509,118 +579,204 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.5rem;
+            gap: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
         }
 
+        .stat-item:nth-child(1) { animation-delay: 0.2s; }
+        .stat-item:nth-child(2) { animation-delay: 0.4s; }
+        .stat-item:nth-child(3) { animation-delay: 0.6s; }
+
         .stat-icon {
-            width: 48px;
-            height: 48px;
-            background: #319795;
-            border-radius: 12px;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5rem;
+            font-size: 2rem;
             margin-bottom: 0.5rem;
         }
 
         .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #2d3748;
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            color: #4a5568;
-            font-weight: 500;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 6rem 0;
-            background: white;
-        }
-
-        .features-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            text-align: center;
-        }
-
-        .features-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 1rem;
-        }
-
-        .features-title .highlight {
-            color: #319795;
-        }
-
-        .features-subtitle {
-            font-size: 1.2rem;
-            color: #4a5568;
-            margin-bottom: 4rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-
-        .feature-card {
-            background: white;
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            text-align: left;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
-        }
-
-        .feature-image {
-            width: 100%;
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-title {
-            font-size: 1.3rem;
-            font-weight: 600;
+            font-size: 3rem;
+            font-weight: 900;
             color: #2d3748;
             margin-bottom: 0.5rem;
         }
 
-        .feature-price {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #319795;
+        .stat-label {
+            font-size: 1.2rem;
+            color: #4a5568;
+            font-weight: 600;
+        }
+
+        /* Room Types Section */
+        .room-types {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f9fafb 0%, #f0fdfa 100%);
+        }
+
+        .room-types-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .section-title .highlight {
+            background: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: #4a5568;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .room-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(209, 213, 219, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .room-card:nth-child(1) { animation-delay: 0.1s; }
+        .room-card:nth-child(2) { animation-delay: 0.2s; }
+        .room-card:nth-child(3) { animation-delay: 0.3s; }
+        .room-card:nth-child(4) { animation-delay: 0.4s; }
+        .room-card:nth-child(5) { animation-delay: 0.5s; }
+        .room-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .room-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .room-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .room-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0,0,0,0.2) 0%, transparent 100%);
+        }
+
+        .room-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .room-rating {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 0.5rem 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            z-index: 10;
+        }
+
+        .room-content {
+            padding: 2rem;
+        }
+
+        .room-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 1rem;
         }
 
-        .feature-description {
-            color: #4a5568;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
+        .room-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
         }
 
-        .feature-amenities {
+        .room-price {
+            text-align: right;
+        }
+
+        .current-price {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #14b8a6;
+        }
+
+        .original-price {
+            font-size: 1rem;
+            color: #9ca3af;
+            text-decoration: line-through;
+        }
+
+        .price-period {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .room-description {
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .amenities {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
@@ -629,34 +785,48 @@
 
         .amenity-tag {
             background: #e6fffa;
-            color: #319795;
-            padding: 0.3rem 0.8rem;
+            color: #0d9488;
+            padding: 0.4rem 0.8rem;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 500;
         }
 
-        .book-btn {
-            width: 100%;
-            padding: 1rem;
-            background: #319795;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s ease;
+        .room-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .book-btn:hover {
-            background: #2c7a7b;
+        .reviews {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .book-room-btn {
+            background: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .book-room-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(20, 184, 166, 0.3);
         }
 
         /* Footer */
         .footer {
-            background: #2d3748;
+            background: #1a202c;
             color: white;
-            padding: 3rem 0 1rem;
+            padding: 4rem 0 2rem;
         }
 
         .footer-container {
@@ -667,21 +837,21 @@
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
 
         .footer-section h3 {
             font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #319795;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #14b8a6;
         }
 
         .footer-section p, .footer-section li {
             color: #a0aec0;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             line-height: 1.6;
         }
 
@@ -696,15 +866,32 @@
         }
 
         .footer-section a:hover {
-            color: #319795;
+            color: #14b8a6;
         }
 
         .footer-bottom {
-            border-top: 1px solid #4a5568;
-            padding-top: 1rem;
+            border-top: 1px solid #2d3748;
+            padding-top: 2rem;
             text-align: center;
-            color: #a0aec0;
+            color: #718096;
             font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
         /* Responsive Design */
@@ -720,6 +907,11 @@
             }
 
             .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .footer-content {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 2rem;
             }
@@ -748,23 +940,31 @@
                 gap: 2rem;
             }
 
-            .category-cards {
-                margin-top: 2rem;
+            .room-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .floating-card-1, .floating-card-2 {
+                display: none;
             }
         }
 
-        /* Smooth Animations */
-        .fade-in {
+        /* Scroll Reveal Animation */
+        .reveal {
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -774,59 +974,53 @@
         <div class="nav-container">
             <div class="logo">
                 <div class="logo-icon">C+</div>
-                <div class="logo-text">ColivePlusRooms</div>
+                <div class="logo-text">ColivePlus</div>
             </div>
             <nav class="nav-menu">
-                <a href="#residences" class="nav-link">Explore Residences</a>
-                <div class="nav-dropdown">
-                    <span class="nav-link">Know More</span>
-                    <span>▼</span>
-                </div>
+                <a href="#properties" class="nav-link">Explore Properties</a>
+                <a href="#about" class="nav-link">About Us</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </nav>
-            <a href="https://coliveplusrooms.com/verification.html" class="verify-btn">Document Verification</a>
+            <a href="#" class="book-btn">Book Now</a>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-container">
-            <div class="hero-content fade-in">
-                <h1 class="hero-title">Come, live the new kind of Living.</h1>
-                <p class="hero-subtitle">Life at a professionally managed accommodation awaits you.</p>
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Find Your Perfect 
+                    <span class="highlight">Co-living</span> Space
+                </h1>
+                <p class="hero-subtitle">
+                    Experience premium student housing & co-living spaces with world-class amenities, 
+                    vibrant communities, and unmatched convenience in prime locations.
+                </p>
                 
                 <div class="search-section">
-                    <label class="search-label">Find in and around...</label>
+                    <label class="search-label">Find accommodations near your college or workplace</label>
                     <div class="search-container">
-                        <input type="text" class="search-input" placeholder="Search your college">
-                        <button class="location-btn">📍</button>
-                        <button class="search-btn">Search</button>
+                        <input type="text" class="search-input" placeholder="Search by college, university, or area" id="searchInput">
+                        <button class="location-btn" id="locationBtn">📍</button>
+                        <button class="search-btn" id="searchBtn">
+                            🔍 Search
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <div class="hero-visual fade-in">
-                <div class="main-image"></div>
-                <div class="category-cards">
-                    <div class="category-card">
-                        <div class="category-image student-img"></div>
-                        <div class="category-info">
-                            <h3>Modern Student Housing</h3>
-                        </div>
-                        <div class="category-arrow">→</div>
+            <div class="hero-visual">
+                <div class="main-image">
+                    <div class="floating-card floating-card-1">
+                        <div class="icon">⭐</div>
+                        <h4>4.8/5</h4>
+                        <p>Guest Rating</p>
                     </div>
-                    <div class="category-card">
-                        <div class="category-image professional-img"></div>
-                        <div class="category-info">
-                            <h3>Co-living for Professionals</h3>
-                        </div>
-                        <div class="category-arrow">→</div>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-image apartment-img"></div>
-                        <div class="category-info">
-                            <h3>Managed Apartments</h3>
-                        </div>
-                        <div class="category-arrow">→</div>
+                    <div class="floating-card floating-card-2">
+                        <div class="icon">✅</div>
+                        <h4>24/7</h4>
+                        <p>Security</p>
                     </div>
                 </div>
             </div>
@@ -836,113 +1030,241 @@
     <!-- Stats Section -->
     <section class="stats">
         <div class="stats-container">
-            <div class="stat-item fade-in">
+            <div class="stat-item">
                 <div class="stat-icon">🏢</div>
                 <div class="stat-number">15+</div>
                 <div class="stat-label">Cities</div>
             </div>
-            <div class="stat-item fade-in">
+            <div class="stat-item">
                 <div class="stat-icon">🏠</div>
                 <div class="stat-number">450+</div>
-                <div class="stat-label">Residences</div>
+                <div class="stat-label">Properties</div>
             </div>
-            <div class="stat-item fade-in">
-                <div class="stat-icon">🛏️</div>
+            <div class="stat-item">
+                <div class="stat-icon">👥</div>
                 <div class="stat-number">50,000+</div>
-                <div class="stat-label">Beds</div>
+                <div class="stat-label">Happy Residents</div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features" id="residences">
-        <div class="features-container">
-            <h2 class="features-title">Not just <span class="highlight">four walls and a roof</span></h2>
-            <p class="features-subtitle">Come over and experience how a place to stay can be so much more</p>
-            
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-image" style="background-image: url('/placeholder.svg?height=200&width=300&text=Luxury+Suite')"></div>
-                    <h3 class="feature-title">Luxury Suite</h3>
-                    <div class="feature-price">₹25,000/month</div>
-                    <p class="feature-description">Premium accommodation with world-class amenities and personalized services.</p>
-                    <div class="feature-amenities">
-                        <span class="amenity-tag">Private Bathroom</span>
-                        <span class="amenity-tag">AC</span>
-                        <span class="amenity-tag">WiFi</span>
-                        <span class="amenity-tag">Housekeeping</span>
+    <!-- Room Types Section -->
+    <section id="properties" class="room-types">
+        <div class="room-types-container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    Choose Your Perfect 
+                    <span class="highlight">Living Space</span>
+                </h2>
+                <p class="section-subtitle">
+                    From budget-friendly shared rooms to luxury suites, discover accommodations 
+                    that match your lifestyle and budget perfectly.
+                </p>
+            </div>
+
+            <div class="room-grid">
+                <div class="room-card">
+                    <div class="room-image" style="background-image: url('https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=600&h=400&q=80')">
+                        <div class="room-badge">Most Popular</div>
+                        <div class="room-rating">
+                            <span>⭐</span>
+                            <span>4.8</span>
+                        </div>
                     </div>
-                    <button class="book-btn">Book Now</button>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div>
+                                <h3 class="room-title">Premium Single Room</h3>
+                            </div>
+                            <div class="room-price">
+                                <div class="original-price">₹30,000</div>
+                                <div class="current-price">₹25,000</div>
+                                <div class="price-period">/month</div>
+                            </div>
+                        </div>
+                        <p class="room-description">
+                            Luxury single occupancy room with modern amenities and 24/7 security.
+                        </p>
+                        <div class="amenities">
+                            <span class="amenity-tag">Private Bathroom</span>
+                            <span class="amenity-tag">AC</span>
+                            <span class="amenity-tag">WiFi</span>
+                            <span class="amenity-tag">Housekeeping</span>
+                        </div>
+                        <div class="room-footer">
+                            <span class="reviews">234 reviews</span>
+                            <button class="book-room-btn">📅 Book Now</button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="feature-card fade-in">
-                    <div class="feature-image" style="background-image: url('/placeholder.svg?height=200&width=300&text=Premium+Room')"></div>
-                    <h3 class="feature-title">Premium Room</h3>
-                    <div class="feature-price">₹18,000/month</div>
-                    <p class="feature-description">Comfortable living spaces designed for modern students and professionals.</p>
-                    <div class="feature-amenities">
-                        <span class="amenity-tag">Shared Bathroom</span>
-                        <span class="amenity-tag">AC</span>
-                        <span class="amenity-tag">Study Desk</span>
-                        <span class="amenity-tag">Common Area</span>
+                <div class="room-card">
+                    <div class="room-image" style="background-image: url('https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=600&h=400&q=80')">
+                        <div class="room-badge">Best Value</div>
+                        <div class="room-rating">
+                            <span>⭐</span>
+                            <span>4.6</span>
+                        </div>
                     </div>
-                    <button class="book-btn">Book Now</button>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div>
+                                <h3 class="room-title">Deluxe Twin Sharing</h3>
+                            </div>
+                            <div class="room-price">
+                                <div class="original-price">₹22,000</div>
+                                <div class="current-price">₹18,000</div>
+                                <div class="price-period">/month</div>
+                            </div>
+                        </div>
+                        <p class="room-description">
+                            Comfortable twin sharing accommodation perfect for students and young professionals.
+                        </p>
+                        <div class="amenities">
+                            <span class="amenity-tag">Shared Bathroom</span>
+                            <span class="amenity-tag">AC</span>
+                            <span class="amenity-tag">Study Desk</span>
+                            <span class="amenity-tag">Common Area</span>
+                        </div>
+                        <div class="room-footer">
+                            <span class="reviews">189 reviews</span>
+                            <button class="book-room-btn">📅 Book Now</button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="feature-card fade-in">
-                    <div class="feature-image" style="background-image: url('/placeholder.svg?height=200&width=300&text=Standard+Room')"></div>
-                    <h3 class="feature-title">Standard Room</h3>
-                    <div class="feature-price">₹12,000/month</div>
-                    <p class="feature-description">Budget-friendly accommodation without compromising on quality and safety.</p>
-                    <div class="feature-amenities">
-                        <span class="amenity-tag">Shared Facilities</span>
-                        <span class="amenity-tag">WiFi</span>
-                        <span class="amenity-tag">Security</span>
-                        <span class="amenity-tag">Community</span>
+                <div class="room-card">
+                    <div class="room-image" style="background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&h=400&q=80')">
+                        <div class="room-rating">
+                            <span>⭐</span>
+                            <span>4.9</span>
+                        </div>
                     </div>
-                    <button class="book-btn">Book Now</button>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div>
+                                <h3 class="room-title">Studio Apartment</h3>
+                            </div>
+                            <div class="room-price">
+                                <div class="current-price">₹35,000</div>
+                                <div class="price-period">/month</div>
+                            </div>
+                        </div>
+                        <p class="room-description">
+                            Independent studio apartment with complete privacy and modern lifestyle amenities.
+                        </p>
+                        <div class="amenities">
+                            <span class="amenity-tag">Private Kitchen</span>
+                            <span class="amenity-tag">Balcony</span>
+                            <span class="amenity-tag">Parking</span>
+                            <span class="amenity-tag">24/7 Security</span>
+                        </div>
+                        <div class="room-footer">
+                            <span class="reviews">156 reviews</span>
+                            <button class="book-room-btn">📅 Book Now</button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="feature-card fade-in">
-                    <div class="feature-image" style="background-image: url('/placeholder.svg?height=200&width=300&text=Studio+Apartment')"></div>
-                    <h3 class="feature-title">Studio Apartment</h3>
-                    <div class="feature-price">₹30,000/month</div>
-                    <p class="feature-description">Independent living with complete privacy and modern amenities.</p>
-                    <div class="feature-amenities">
-                        <span class="amenity-tag">Private Kitchen</span>
-                        <span class="amenity-tag">Balcony</span>
-                        <span class="amenity-tag">Parking</span>
-                        <span class="amenity-tag">24/7 Security</span>
+                <div class="room-card">
+                    <div class="room-image" style="background-image: url('https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=600&h=400&q=80')">
+                        <div class="room-badge">Premium</div>
+                        <div class="room-rating">
+                            <span>⭐</span>
+                            <span>4.9</span>
+                        </div>
                     </div>
-                    <button class="book-btn">Book Now</button>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div>
+                                <h3 class="room-title">Executive Suite</h3>
+                            </div>
+                            <div class="room-price">
+                                <div class="current-price">₹45,000</div>
+                                <div class="price-period">/month</div>
+                            </div>
+                        </div>
+                        <p class="room-description">
+                            Premium executive accommodation designed for business professionals.
+                        </p>
+                        <div class="amenities">
+                            <span class="amenity-tag">Work Station</span>
+                            <span class="amenity-tag">Premium WiFi</span>
+                            <span class="amenity-tag">Concierge</span>
+                            <span class="amenity-tag">Gym Access</span>
+                        </div>
+                        <div class="room-footer">
+                            <span class="reviews">98 reviews</span>
+                            <button class="book-room-btn">📅 Book Now</button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="feature-card fade-in">
-                    <div class="feature-image" style="background-image: url('/placeholder.svg?height=200&width=300&text=Twin+Sharing')"></div>
-                    <h3 class="feature-title">Twin Sharing</h3>
-                    <div class="feature-price">₹10,000/month</div>
-                    <p class="feature-description">Affordable shared accommodation perfect for students and young professionals.</p>
-                    <div class="feature-amenities">
-                        <span class="amenity-tag">Shared Room</span>
-                        <span class="amenity-tag">Common Kitchen</span>
-                        <span class="amenity-tag">Laundry</span>
-                        <span class="amenity-tag">Recreation</span>
+                <div class="room-card">
+                    <div class="room-image" style="background-image: url('https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=600&h=400&q=80')">
+                        <div class="room-rating">
+                            <span>⭐</span>
+                            <span>4.3</span>
+                        </div>
                     </div>
-                    <button class="book-btn">Book Now</button>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div>
+                                <h3 class="room-title">Budget Single Room</h3>
+                            </div>
+                            <div class="room-price">
+                                <div class="original-price">₹15,000</div>
+                                <div class="current-price">₹12,000</div>
+                                <div class="price-period">/month</div>
+                            </div>
+                        </div>
+                        <p class="room-description">
+                            Affordable single room accommodation without compromising on quality and safety.
+                        </p>
+                        <div class="amenities">
+                            <span class="amenity-tag">Shared Facilities</span>
+                            <span class="amenity-tag">WiFi</span>
+                            <span class="amenity-tag">Security</span>
+                            <span class="amenity-tag">Community</span>
+                        </div>
+                        <div class="room-footer">
+                            <span class="reviews">267 reviews</span>
+                            <button class="book-room-btn">📅 Book Now</button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="feature-card fade-in">
-                    <div class="feature-image" style="background-image: url('/placeholder.svg?height=200&width=300&text=Executive+Suite')"></div>
-                    <h3 class="feature-title">Executive Suite</h3>
-                    <div class="feature-price">₹35,000/month</div>
-                    <p class="feature-description">Premium executive accommodation with business-class amenities.</p>
-                    <div class="feature-amenities">
-                        <span class="amenity-tag">Work Station</span>
-                        <span class="amenity-tag">Premium WiFi</span>
-                        <span class="amenity-tag">Concierge</span>
-                        <span class="amenity-tag">Gym Access</span>
+                <div class="room-card">
+                    <div class="room-image" style="background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&h=400&q=80')">
+                        <div class="room-rating">
+                            <span>⭐</span>
+                            <span>4.7</span>
+                        </div>
                     </div>
-                    <button class="book-btn">Book Now</button>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div>
+                                <h3 class="room-title">Co-living Space</h3>
+                            </div>
+                            <div class="room-price">
+                                <div class="current-price">₹20,000</div>
+                                <div class="price-period">/month</div>
+                            </div>
+                        </div>
+                        <p class="room-description">
+                            Modern co-living space fostering community and collaboration among residents.
+                        </p>
+                        <div class="amenities">
+                            <span class="amenity-tag">Shared Kitchen</span>
+                            <span class="amenity-tag">Lounge</span>
+                            <span class="amenity-tag">Laundry</span>
+                            <span class="amenity-tag">Events</span>
+                        </div>
+                        <div class="room-footer">
+                            <span class="reviews">203 reviews</span>
+                            <button class="book-room-btn">📅 Book Now</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -953,44 +1275,51 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>ColivePlusRooms</h3>
-                    <p>Your premium destination for modern student housing and co-living spaces. We provide safe, comfortable, and professionally managed accommodations.</p>
-                    <p>Experience the new kind of living with us.</p>
+                    <h3>ColivePlus</h3>
+                    <p>
+                        Your premium destination for modern student housing and co-living spaces. 
+                        Experience the future of shared living with world-class amenities and vibrant communities.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        📍 Multiple locations across 2+ cities<br>
+                        📞 +91 7901705920<br>
+                        ✉️ coliveplusrooms@gmail.com
+                    </p>
                 </div>
-                
+
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#residences">Explore Residences</a></li>
+                        <li><a href="#properties">Explore Properties</a></li>
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#contact">Contact</a></li>
-                        <li><a href="https://coliveplusrooms.com/verification.html">Document Verification</a></li>
+                        <li><a href="#help">Help Center</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
-                    <h3>Accommodation Types</h3>
+                    <h3>Room Types</h3>
                     <ul>
-                        <li><a href="#luxury">Luxury Suites</a></li>
-                        <li><a href="#premium">Premium Rooms</a></li>
-                        <li><a href="#standard">Standard Rooms</a></li>
+                        <li><a href="#single">Single Rooms</a></li>
+                        <li><a href="#twin">Twin Sharing</a></li>
                         <li><a href="#studio">Studio Apartments</a></li>
-                        <li><a href="#sharing">Twin Sharing</a></li>
+                        <li><a href="#executive">Executive Suites</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <p>📍 123 University Road, Student Hub Area</p>
-                    <p>📞 +91 98765 43210</p>
-                    <p>✉️ info@coliveplusrooms.com</p>
-                    <p>🌐 www.coliveplusrooms.com</p>
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
-                <p>&copy; 2024 ColivePlusRooms. All rights reserved. | Privacy Policy | Terms of Service</p>
+                <p>&copy; 2025 ColivePlus. All rights reserved. | Privacy Policy | Terms of Service</p>
             </div>
         </div>
     </footer>
@@ -1010,29 +1339,21 @@
             });
         });
 
-        // Add scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationDelay = '0.1s';
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all elements that should animate
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'none';
+            }
         });
 
         // Search functionality
-        document.querySelector('.search-btn').addEventListener('click', function() {
-            const searchValue = document.querySelector('.search-input').value;
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const searchValue = document.getElementById('searchInput').value;
             if (searchValue.trim()) {
                 alert(`Searching for accommodations near: ${searchValue}`);
             } else {
@@ -1040,34 +1361,80 @@
             }
         });
 
-        // Category card clicks
-        document.querySelectorAll('.category-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const title = this.querySelector('h3').textContent;
-                document.querySelector('#residences').scrollIntoView({
-                    behavior: 'smooth'
+        // Location button
+        document.getElementById('locationBtn').addEventListener('click', function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    alert('Location detected! Searching nearby accommodations...');
+                }, function() {
+                    alert('Unable to retrieve your location. Please enter manually.');
                 });
-            });
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
         });
 
         // Book now buttons
-        document.querySelectorAll('.book-btn').forEach(btn => {
+        document.querySelectorAll('.book-room-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                const roomType = this.closest('.feature-card').querySelector('.feature-title').textContent;
-                const price = this.closest('.feature-card').querySelector('.feature-price').textContent;
-                alert(`Booking ${roomType} at ${price}. Redirecting to booking form...`);
+                const roomType = this.closest('.room-card').querySelector('.room-title').textContent;
+                const price = this.closest('.room-card').querySelector('.current-price').textContent;
+                alert(`Booking ${roomType} at ${price}/month. Redirecting to booking form...`);
             });
         });
 
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+        // Scroll reveal animation
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealElements);
+
+        // Initialize animations on load
+        window.addEventListener('load', () => {
+            revealElements();
+        });
+
+        // Enhanced search with Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('searchBtn').click();
+            }
+        });
+
+        // Add hover effects to room cards
+        document.querySelectorAll('.room-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add click to copy contact info
+        document.querySelectorAll('.footer-section p').forEach(p => {
+            if (p.textContent.includes('📞') || p.textContent.includes('✉️')) {
+                p.style.cursor = 'pointer';
+                p.addEventListener('click', function() {
+                    const text = this.textContent.replace(/📞|✉️|📍/g, '').trim();
+                    navigator.clipboard.writeText(text).then(() => {
+                        alert('Contact info copied to clipboard!');
+                    }).catch(() => {
+                        console.log('Failed to copy contact info');
+                    });
+                });
             }
         });
     </script>
